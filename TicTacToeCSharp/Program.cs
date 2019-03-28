@@ -11,7 +11,10 @@ namespace TicTacToeCSharp
         static void Main(string[] args)
         {
 
-
+            Game game = new Game();
+            game.InitializeGame();
+            game.PlacePiece(game.X, 1, 1);
+            UI.GameBoardComponent(game);
         }
     }
 }
