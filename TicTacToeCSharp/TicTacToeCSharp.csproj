@@ -43,7 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Game.cs" />
+    <Compile Include="GameState.cs" />
+    <Compile Include="GameLogic.cs" />
     <Compile Include="Players\O.cs" />
     <Compile Include="Players\PlayerBase.cs" />
     <Compile Include="Players\PlayerType.cs" />
