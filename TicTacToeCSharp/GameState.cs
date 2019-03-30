@@ -14,7 +14,7 @@ namespace TicTacToeCSharp
         public List<string> Row1 = new List<string> { "", "", "" };
         public List<string> Row2 = new List<string> { "", "", "" };
         public List<string> Row3 = new List<string> { "", "", "" };
-        public bool WinnerExists = false;
+        public bool WinnerOrTieExists = false;
         
     }    
 

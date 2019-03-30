@@ -60,7 +60,8 @@ namespace TicTacToeCSharp
         {
             HorizontalCheck(game);
             VericalCheck(game);
-            DiagonalCheck(game);            
+            DiagonalCheck(game);
+            TieCheck(game);
         }
 
         public static void VericalCheck(GameState game)
@@ -74,14 +75,14 @@ namespace TicTacToeCSharp
                     list.Add(row[i]);
                     
                 }
-                if (list.Any(o => o != list[0]))
+                if (list.All(o => o == list[0] && o != "" && list.Count == 3))
                 {
-                    game.WinnerExists = true;
+                    game.WinnerOrTieExists = true;
+                    Console.WriteLine($"{list[0]}'s Win! Game over");
                     break;
                 }
                 list.Clear();
-            }          
-                
+            }                          
         }
 
         public static void DiagonalCheck(GameState game)
@@ -89,9 +90,15 @@ namespace TicTacToeCSharp
             var diagonal1 = new List<string> { game.Row1[0], game.Row2[1] , game.Row3[2] };
             var diagonal2 = new List<string> { game.Row1[2], game.Row2[1], game.Row3[0] };
 
-            if (diagonal1.Any(o => o != diagonal1[0]) || diagonal2.Any(o => o != diagonal2[0]))
+            if (diagonal1.All(o => o == diagonal1[0] && o != ""))
             {
-                game.WinnerExists = true;                
+                game.WinnerOrTieExists = true;
+                Console.WriteLine($"{diagonal1[0]}'s Win! Game over");
+            }
+            if (diagonal2.All(o => o == diagonal2[0] && o != ""))
+            {
+                game.WinnerOrTieExists = true;
+                Console.WriteLine($"{diagonal2[0]}'s Win! Game over");
             }
         }
 
@@ -101,13 +108,21 @@ namespace TicTacToeCSharp
 
             foreach (var row in rows)
             {
-                if (row.All(o => o == row[0]))
+                if (row.All(o => o == row[0] && o != ""))
                 {
-                    game.WinnerExists = true;
+                    game.WinnerOrTieExists = true;
+                    Console.WriteLine($"{row[0]}'s Win! Game over");
                     break;
                 }                
+            }            
+        }
+
+        private static void TieCheck(GameState game)
+        {            
+            if (game.Row1.All(o=>o != "") && game.Row2.All(o => o != "") && game.Row3.All(o => o != ""))
+            {
+                game.WinnerOrTieExists = true;
             }
-            
         }
     }
 }

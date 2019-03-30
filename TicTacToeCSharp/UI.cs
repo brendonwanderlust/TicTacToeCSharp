@@ -125,17 +125,33 @@ namespace TicTacToeCSharp
 
         public static void InitializeGame(GameState game)
         {
-            while (game.WinnerExists == false)
+            bool gameOn = true;
+            DisplayGameBoardComponent(game);
+            while (gameOn)
             {
-                
-                    DisplayGameBoardComponent(game);
+                if (game.WinnerOrTieExists == false)
+                {
+                    
                     PlayerTakesTurn(game, game.O);
+                    GameLogic.CheckForWinner(game);
                     DisplayGameBoardComponent(game);
+                }
+
+                if (game.WinnerOrTieExists == false)
+                {                    
                     PlayerTakesTurn(game, game.X);
-                   // GameLogic.CheckForWinner(game);          
-                
-                
+                    GameLogic.CheckForWinner(game);
+                    DisplayGameBoardComponent(game);
+                }
+
+                if (game.WinnerOrTieExists == true)
+                {
+                    gameOn = false;
+                }
             }
+
+            
+
             
         }
 
